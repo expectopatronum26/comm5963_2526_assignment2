@@ -21,17 +21,20 @@ def train_model(x_tensor, y_tensor) -> torch.nn.Sequential:
     torch.manual_seed(5963)
     # TODO: Configure your model structure
     model = torch.nn.Sequential(
-        torch.nn.Linear(len(FEATURES), 1),
-        torch.nn.Linear(1, len(TARGET_CLASS_DICT))  # len(TARGET_CLASS_DICT) is 3 (Setosa, Versicolor, Verginica)
+        torch.nn.Linear(len(FEATURES), 16),
+        torch.nn.ReLU(),
+        torch.nn.Linear(16, 8),
+        torch.nn.ReLU(),
+        torch.nn.Linear(8, len(TARGET_CLASS_DICT))  # len(TARGET_CLASS_DICT) is 3 (Setosa, Versicolor, Verginica)
     )
     # Cross Entropy Loss is used for classification
     loss_function = torch.nn.CrossEntropyLoss()
 
     # TODO: Configure your hyper-parameters
-    num_epochs = 10
-    learning_rate = 0.8
+    num_epochs = 500
+    learning_rate = 0.01
     # TODO: Configurable: optimizer
-    optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+    optimizer = torch.optim.SGD(model.parameters(), momentum = 0.9, lr=learning_rate, weight_decay = 0.0001, nesterov=True)
 
     # Start training (do not change this unless you know what you are doing)
     for epoch in range(num_epochs):
