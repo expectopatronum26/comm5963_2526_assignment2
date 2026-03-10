@@ -57,8 +57,7 @@ def run_kmeans(k: int = 3):
 
     # TODO: Run KMeans with k clusters and get the cluster labels for each data point
     kmeans = KMeans(n_clusters=3, random_state=5963)
-    scaled_features = ['Sepal_length_n', 'Sepal_width_n', 'Petal_length_n', 'Petal_width_n']
-    clusters = kmeans.fit_predict(standardized_df[scaled_features])
+    clusters = kmeans.fit_predict(standardized_df[SCALED_FEATURES])
     standardized_df['cluster_k3'] = [f'Cluster {c+1}' for c in clusters]
 
     # TODO: Visualize the result with a scatter plot (Petal_length on x-axis and Sepal_length on y-axis, color by cluster)
