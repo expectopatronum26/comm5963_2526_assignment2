@@ -13,10 +13,8 @@ SCALED_FEATURES = [f'{c}_n' for c in FEATURES]
 def read_standarized_data() -> pd.DataFrame:
     iris_df = read_dataframe()
     # TODO: Normalize the features
-    features = ['Sepal_length', 'Sepal_width', 'Petal_length', 'Petal_width']
-    scaled_features = ['Sepal_length_n', 'Sepal_width_n', 'Petal_length_n', 'Petal_width_n']
     scaler = StandardScaler()
-    iris_df[scaled_features] = scaler.fit_transform(iris_df[features])
+    iris_df[SCALED_FEATURES] = scaler.fit_transform(iris_df[FEATURES])
     return iris_df
 
 def run_elbow_method():
@@ -25,8 +23,8 @@ def run_elbow_method():
     # TODO: Run KMeans for k = 1 to 10 and calculate the MSE (inertia) for each k
     for k in range(1, 10):
         kmeans = KMeans(n_clusters=k, random_state=5963)
-        scaled_features = ['Sepal_length_n', 'Sepal_width_n', 'Petal_length_n', 'Petal_width_n']
-        kmeans.fit(standardized_df[scaled_features])
+        # scaled_features = ['Sepal_length_n', 'Sepal_width_n', 'Petal_length_n', 'Petal_width_n']
+        kmeans.fit(standardized_df[SCALED_FEATURES])
         mse_data.append({'k': k, 'mse': kmeans.inertia_})
     mse_df = pd.DataFrame(mse_data)
 
