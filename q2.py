@@ -26,16 +26,15 @@ def run_decision_tree():
 
 def show_decision_tree(model_from_part1):
     # TODO: Visualize the decision tree
-    features = ['Sepal_length', 'Sepal_width', 'Petal_length', 'Petal_width']
     plt.figure(figsize=(16, 6))
     plot_tree(
         model,
-        feature_names=features,
+        feature_names=FEATURES,
         class_names=model.classes_,
         filled=True,
         fontsize=18
     )
-    plt.title(f'Survival prediction by {"+".join(features)}')
+    plt.title(f'Survival prediction by {"+".join(FEATURES)}')
     plt.show()
 
 def run_random_forest():
