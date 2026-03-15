@@ -21,21 +21,18 @@ def run_elbow_method():
     standardized_df = read_standarized_data()
     mse_data = []
     # TODO: Run KMeans for k = 1 to 10 and calculate the MSE (inertia) for each k
-    for k in range(1, 10):
+    for k in range(1, 11):
         kmeans = KMeans(n_clusters=k, random_state=5963)
-        # scaled_features = ['Sepal_length_n', 'Sepal_width_n', 'Petal_length_n', 'Petal_width_n']
         kmeans.fit(standardized_df[SCALED_FEATURES])
         mse_data.append({'k': k, 'mse': kmeans.inertia_})
     mse_df = pd.DataFrame(mse_data)
 
     # TODO: Visualize the result with a line plot (k on x-axis and MSE on y-axis)
-    # Visualize the MSE change as K increases
     mse_figure = px.line(
         data_frame = mse_df,
         x = 'k',
         y = 'mse',
-        title = 'Elbow Method for Optimal K',
-        labels = {'k': 'Number of Clusters (K)', 'mse': 'Loss (Within-Cluster Sum of Squares)'},
+        title = 'Elbow Method for KMeans Clustering',
         markers = True,
         width = 800, height = 600
     )
@@ -58,16 +55,16 @@ def run_kmeans(k: int = 3):
     # TODO: Run KMeans with k clusters and get the cluster labels for each data point
     kmeans = KMeans(n_clusters=3, random_state=5963)
     clusters = kmeans.fit_predict(standardized_df[SCALED_FEATURES])
-    standardized_df['cluster_k3'] = [f'Cluster {c+1}' for c in clusters]
+    standardized_df['cluster'] = [f'#{c+1}' for c in clusters]
 
     # TODO: Visualize the result with a scatter plot (Petal_length on x-axis and Sepal_length on y-axis, color by cluster)
     standardized_figure = px.scatter(
         data_frame = standardized_df,
         x = 'Petal_length',
         y = 'Sepal_length',
-        color = 'cluster_k3',
-        title = 'K-Means Clustering (k=3)',
-        width = 600, height = 600
+        color = 'cluster',
+        title = 'KMeans Clustering with k=3',
+        width = 800, height = 600
     )
 
     # Increase font sizes

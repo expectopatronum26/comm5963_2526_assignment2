@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import KFold, cross_val_score
 from utils import load_train_test_datasets
 from static import FEATURES, TARGET
+from sklearn.ensemble import RandomForestClassifier
 
 
 def run_decision_tree():
@@ -14,7 +15,7 @@ def run_decision_tree():
     model = DecisionTreeClassifier(criterion = 'gini', max_depth = 2, random_state = 5963)
     model.fit(X = train_x, y = train_y)
 
-    # Train & test accuracy
+    # Train accuracy & test accuracy
     train_score = model.score(train_x, train_y)
     test_score = model.score(test_x, test_y)
 
@@ -24,9 +25,10 @@ def run_decision_tree():
 
     return model
 
+
 def show_decision_tree(model_from_part1):
     # TODO: Visualize the decision tree
-    plt.figure(figsize=(16, 6))
+    plt.figure(figsize=(16, 8))
     plot_tree(
         model,
         feature_names=FEATURES,
@@ -34,14 +36,13 @@ def show_decision_tree(model_from_part1):
         filled=True,
         fontsize=18
     )
-    plt.title(f'Survival prediction by {"+".join(FEATURES)}')
+    # plt.title(f'Survival prediction by {"+".join(FEATURES)}')
     plt.show()
+
 
 def run_random_forest():
     train_x, train_y, test_x, test_y = load_train_test_datasets()
     # TODO: Run a classification by constructing a random forest (Please set the random_state to 5963)
-    from sklearn.ensemble import RandomForestClassifier
-
     # Train a Random Forest
     model = RandomForestClassifier(
         n_estimators = 4,  # How many random trees we use
@@ -51,13 +52,11 @@ def run_random_forest():
     )
     model.fit(X = train_x, y = train_y)
 
-
     # TODO: Print the train and test accuracy of the model
     train_score = model.score(train_x, train_y)
     test_score = model.score(test_x, test_y)
     print(f'Train Accuracy: {train_score:.2%}')
     print(f'Test accuracy: {test_score:.2%}')
-
 
 
 if __name__ == '__main__':
