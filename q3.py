@@ -19,7 +19,7 @@ def calc_accuracy(_model, x_tensor, y_tensor):
 def train_model(x_tensor, y_tensor) -> torch.nn.Sequential:
     torch.manual_seed(5963)
     # TODO: Configure your model structure
-    # Usage of torch.nn.linear from Gemini 3 - fast via https://gemini.google.com/
+    # Usage of torch.nn.Sequential from Gemini 3 - fast via https://gemini.google.com/
     # Prompt: You are a machine learning expert. Now I am going to use Iris dataset to build a neural network. Please give me some hints on how I can use torch.nn.linear() to configure my model structure (e.g., the number of neurons in Linear(), or if I need to use RELU, dropout). Your language style should be understandable for non-tech people. Don't write the actual code for me because I want to challenge myself first. :)
     # Gemini told me:
     # For Iris, try 8, 16, or 32 neurons in my hidden layers. Otherwise, overfitting would occur.
